@@ -1,3 +1,0 @@
-/home/maksim/project/build/CMakeFiles/main.dir
-/home/maksim/project/build/CMakeFiles/edit_cache.dir
-/home/maksim/project/build/CMakeFiles/rebuild_cache.dir
