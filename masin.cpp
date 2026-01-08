@@ -1,3 +1,4 @@
+#define NOMINMAX
 #include <fstream>
 #include <ios>
 #include <sstream>
@@ -19,6 +20,7 @@ void inputData(std::string text, long double& data){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         break;
     }
 }
@@ -49,6 +51,8 @@ void saveInFile(std::vector<std::vector<long double>> result){
         f << '\n';
     }
     f.close();
+    std::cout << rang::fg::gray << "Данные записаны в файл output.txt" << rang::fg::reset;
+    
 }
 
 bool readFile(std::vector<std::vector<long double>>& result){

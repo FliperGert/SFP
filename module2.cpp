@@ -18,7 +18,7 @@ void inputDataMod2(std::vector<long double>& data){
 
     inputData("Введите массу тела(в кг): ", data[0]);
 
-    inputData("Введите коэффицент жесткости пружины(): ", data[1]);
+    inputData("Введите коэффицент жесткости пружины: ", data[1]);
 
     inputData("Введите отклонение от начального положения системы(в м): ", data[2]);
 

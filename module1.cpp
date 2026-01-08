@@ -26,7 +26,7 @@ long double xInSecond(long double x0, long double s){
 
 void inputDataMod1(std::vector< long double>& data){
 
-    inputData("Введите высоту, с которой телу падает(в м)", data[0]);
+    inputData("Введите высоту, с которой телу падает(в м):", data[0]);
 
     inputData("Введите площадь поперечного сечения тела(в м^2): ", data[1]);
     
@@ -34,7 +34,7 @@ void inputDataMod1(std::vector< long double>& data){
 
     inputData("Введите массу тела(в кг): ", data[3]);
 
-    inputData("Введите время симуляции(в с)", data[4]);
+    inputData("Введите время симуляции(в с):", data[4]);
 }
 
 void startModel1(std::vector<long double> data, std::vector<std::vector <long double>>& result, long double delta_time){

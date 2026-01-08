@@ -1,15 +1,18 @@
+#define NOMINMAX  
 #include <clocale>
 #include <vector>
 #include <limits>
 #include <iostream>
-#include <locale.h>
+#include <locale>
+#include <windows.h>
 #include "rang.hpp"
 #include "masin.h"
 #include "module.h"
 
 
 int main(){
-    setlocale(LC_ALL, "ru");
+    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
     
     std::cout << rang::fg::cyan << "Дорогой пользователь, ты запустил программу симуляцию физических моделей\n" << rang::fg::reset;
 
@@ -18,12 +21,12 @@ int main(){
 
         std::vector<std::vector<long double>> result;
 
-        std::cout << rang::fg::cyan << "Доступные симуляции:\n" << rang::fg::reset;
-        std::cout << rang::fg::green << "1.Падения тела с сопротивление воздуха\n2.Колебания пружины\n3.Движение с постоянным ускорением\n4.Баллистическое движение\n" << rang::fg::reset;
+        std::cout << rang::fg::cyan << "\nДоступные симуляции:\n" << rang::fg::reset;
+        std::cout << rang::fg::green << "1.Падения тела с сопротивление воздуха\n2.Колебания пружины\n3.Движение с постоянным ускорением\n4.Баллистическое движение\n\n" << rang::fg::reset;
 
-        std::cout << rang::fg::blue <<"Выбирите модель(1-4, другой цифровой ввод - переход к действиям над данными):" << rang::fg::reset;
+        std::cout << rang::fg::blue <<"Выбирите модель(1-4, другой цифровой ввод - переход к действиям над данными и выходу):" << rang::fg::reset;
 
-        int choice;
+        long double choice;
         std::cin >> choice;
         if (std::cin.fail()){
             std::cin.clear();
@@ -31,14 +34,15 @@ int main(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-        switch (choice) {
+        switch (static_cast<int>(choice)) {
             case 1:
             {
                 std::vector<long double> data{0,0,0,0,0};
                 inputDataMod1(data);
                 long double delta_time;
-                inputData("Введите измения времени: ", delta_time);
+                inputData("Введите шаг симуляции(в с): ", delta_time);
                 startModel1(data, result, delta_time);
                 break;
             }
@@ -47,7 +51,7 @@ int main(){
                 std::vector<long double> data{0,0,0,0};
                 inputDataMod2(data);
                 long double delta_time;
-                inputData("Введите измения времени: ", delta_time);
+                inputData("Введите шаг симуляции(в с): ", delta_time);
                 startModel2(data, result, delta_time);
                 break;
             }
@@ -56,7 +60,7 @@ int main(){
                 std::vector<long double> data{0,0,0,0};
                 inputDataMod3(data);
                 long double delta_time;
-                inputData("Введите измения времени: ", delta_time);
+                inputData("Введите шаг симуляции(в с): ", delta_time);
                 startModel3(data, result, delta_time);
                 break;
             }
@@ -65,7 +69,7 @@ int main(){
                 std::vector<long double> data{0,0,0,0};
                 inputDataMod4(data);
                 long double delta_time;
-                inputData("Введите измения времени: ", delta_time);
+                inputData("Введите шаг симуляции(в с): ", delta_time);
                 startModel4(data, result, delta_time);
                 break;
             }
@@ -74,18 +78,18 @@ int main(){
                 break;
             }
         }
-        std::cout << rang::fg::cyan << "Доступные действия:\n" << rang::fg::reset;
+        std::cout << rang::fg::cyan << "\nДоступные действия:\n" << rang::fg::reset;
         std::cout << rang::fg::green << "1.Вывод результатов\n2.Запись данных в файл\n3.Чтение данных из файла\n4.Вывод данных и запись в файл\n5.Пропуск действия\nДругой ввод - выход из симуляции\n" << rang::fg::reset;
 
         std::cout << rang::fg::blue <<"Выбирите действия:" << rang::fg::reset;
 
         std::cin >> choice;
 
-        switch (choice){
+        switch (static_cast<int>(choice)){
             case 1:
             {
                 if (result.empty()){
-                    std::cout << rang::fg::red << "Пустой массив данных, создайте сначала массив\n" << rang::fg::reset;
+                    std::cout << rang::fg::red << "Пустой массив данных, создайте сначала массив(проведите симуляцию)\n" << rang::fg::reset;
                 }
                 else{
                     outputResult(result);
