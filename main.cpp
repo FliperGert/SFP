@@ -98,7 +98,12 @@ int main(){
             }
             case 2:
             {
-                saveInFile(result);
+                if (result.empty()) {
+                    std::cout << rang::fg::red << "Пустой массив данных, создайте сначала массив\n" << rang::fg::reset;
+                }
+                else {
+                    saveInFile(result);
+                }
                 break;
             }
             case 3:
